@@ -1,7 +1,11 @@
 <?php
 
+use Livewire\Livewire;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostsController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +41,14 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+// Route::get('/create', [CreateController::class, 'create']);
+Route::get('/create', [App\Http\Livewire\CreatePosts::class, 'create'])->name('create');
+Route::get('/posts', [App\Http\Controllers\PostsController::class, 'index'])->name('posts');
+Route::get('/posts/{id}', [App\Http\Controllers\PostsController::class, 'show'])->name('posts.show');
+Route::get('/posts/{id}/edit', [App\Http\Controllers\PostsController::class, 'edit'])->name('posts.edit');
+Route::post('/posts/{id}/update', [App\Http\Controllers\PostsController::class, 'update'])->name('posts.update');
+Route::get('/posts/{id}/delete', [App\Http\Controllers\PostsController::class, 'destroy'])->name('posts.destroy');
+Route::post('/posts/store', [App\Http\Controllers\PostsController::class, 'store'])->name('posts.store');
+
